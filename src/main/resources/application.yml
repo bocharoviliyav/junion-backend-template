@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: @project.name@
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        show-sql: false
+        query:
+          fail_on_pagination_over_collection_fetch: true
+        types:
+          print:
+            banner: false
+    open-in-view: false
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.xml
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    url: /v3/api-docs.yml
+
+management:
+  endpoint:
+    metrics:
+      enabled: false
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      base-path: "/"
+      exposure:
+        include: "*"
+      path-mapping:
+        health: actuator/health
+        info: actuator/info
+        prometheus: metrics
+
+logbook:
+  exclude:
+    - /actuator/health
+    - /v2/api-docs/
+    - /v3/api-docs/
+    - /v3/api-docs.yml
+    - /swagger-ui.html
+    - /admin/
+    - /webjars/
+    - /swagger-resources/
+    - /swagger-ui/
+    - /metrics
+  obfuscate:
+    headers:
+      - Authorization
+  format:
+    style: json
+
+logging:
+  level:
+    ROOT: INFO
+    org.zalando.logbook.Logbook: TRACE
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([-,%X{traceId:-},%X{spanId:-}]){blue}[%thread] %clr(%-5level) %clr(%logger{36}){magenta} - %msg%n"

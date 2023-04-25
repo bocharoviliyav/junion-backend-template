@@ -1,0 +1,111 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Backoffice example
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:8080/v1
+paths:
+  /goods:
+    get:
+      summary: List of goods
+      operationId: listGoods
+      tags:
+        - goods
+      parameters:
+        - name: limit
+          in: query
+          description: Max number of items in the result
+          required: false
+          schema:
+            type: integer
+            maximum: 100
+            format: int32
+      responses:
+        '200':
+          description: A paged array of goods
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Goods"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create an item
+      operationId: createItem
+      tags:
+        - goods
+      responses:
+        '201':
+          description: No response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /goods/{id}:
+    get:
+      summary: Info for a specific item
+      operationId: getItemById
+      tags:
+        - goods
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the item
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Item:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    Goods:
+      type: array
+      maxItems: 100
+      items:
+        $ref: "#/components/schemas/Item"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
