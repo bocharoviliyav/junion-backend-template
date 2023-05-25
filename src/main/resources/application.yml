@@ -2,14 +2,16 @@ spring:
   application:
     name: @project.name@
   datasource:
-    driver-class-name: org.postgresql.Driver
+    #    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        #        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
         show-sql: false
         query:
           fail_on_pagination_over_collection_fetch: true
