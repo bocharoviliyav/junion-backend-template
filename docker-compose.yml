@@ -7,16 +7,35 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: app
+    ports:
+      - '8080:8080'
     depends_on:
       - db
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/postgres
+      - DB_URL=jdbc:mysql://db:5432/postgres
       - DB_USER=postgres
       - DB_PASSWORD=123
+  #      - DB_URL=jdbc:postgresql://db:3306/db
+  #      - DB_USER=postgres
+  #      - DB_PASSWORD=123
+
+  #  db:
+  #    image: 'postgres:15.2-alpine'
+  #    container_name: db
+  #    environment:
+  #      - POSTGRES_USER=postgres
+  #      - POSTGRES_PASSWORD=123
 
   db:
-    image: 'postgres:15.2-alpine'
+    image: 'mysql:8.0.33'
     container_name: db
+    restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=123
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'mysql'
+      MYSQL_PASSWORD: '123'
+      MYSQL_ROOT_PASSWORD: '123'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
