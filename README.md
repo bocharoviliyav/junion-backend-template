@@ -1,4 +1,4 @@
-# This is the template for Spring Boot Java application
+# This is the template for the Spring Boot Java application
 
 ## The main technologies used in this template
 * [Java 17](https://www.baeldung.com/java-17-new-features)
@@ -106,7 +106,7 @@ and comment
 ## Deployment 
 
 Application can be hosted on any kind of Docker-compatible services. For example let's use
-(Planetscale)[https://planetscale.com] for the serverless MySQL instance and
+[Planetscale](https://planetscale.com) for the serverless MySQL instance and
 [Railway](https://railway.app) for application itself.
 After completed registration let's configure our DB on Planetscale.
 ![img.png](static/images/img.png)
