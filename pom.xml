@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.6</version>
+    <version>3.1.0</version>
     <relativePath/>
   </parent>
   <groupId>tech.junion</groupId>
@@ -321,7 +321,7 @@
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>${spotbugs.version}</version>
         <configuration>
-          <excludeFilterFile>spotbugs.xml</excludeFilterFile>
+          <includeFilterFile>spotbugs-include.xml</includeFilterFile>
         </configuration>
       </plugin>
     </plugins>
