@@ -68,6 +68,24 @@ and
 <!--        </dependency>-->
 ```
 
+And finally, in the application.yml uncomment:
+```yaml
+#    driver-class-name: org.postgresql.Driver
+```
+and 
+```yaml
+ #        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+```
+Comment
+```yaml
+driver-class-name: com.mysql.cj.jdbc.Driver
+```
+and 
+```yaml
+dialect: org.hibernate.dialect.MySQLDialect
+```
+
+
 * If you use docker compose, in docker-compose.yml uncomment
 ```yaml
   #      - DB_URL=jdbc:postgresql://db:3306/db
@@ -119,7 +137,7 @@ and feel free to switch to Java profile and copy jdbc connection URL
 ![img4.png](static/images/img4.png)
 
 The next step is application deployment. Railway is easy-to-use platform, just connect your 
-Github repo and Dockerfile should be founded and configured automatically.
+Github repo. Dockerfile should be founded and configured automatically.
 But we still need add environment variables for DB connection. Click on application and switch to the 
 Variables tab. After that, create three variables DB_URL, DB_USER, DB_PASSWORD and paste information 
 from Planetscale.
